@@ -23,24 +23,24 @@ yarn add -D react-modal-simple-customizable
 
 ## Usage :
 
-Add `MyCounter` to your component:
+Add `Modal` to your component:
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { MyCounter } from 'react-modal-simple-customizable'
+import { Modal } from 'react-modal-simple-customizable'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     <React.StrictMode>
         <div>
             <h2>Default counter</h2>
-            <MyCounter />
+            <Modal />
         </div>
         <hr />
         <div>
             <h2>Counter with predefined value</h2>
-            <MyCounter value={5} />
+            <Modal value={5} />
         </div>
     </React.StrictMode>,
 )

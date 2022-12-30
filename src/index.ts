@@ -1,3 +1,3 @@
-import MyCounter from './components/App'
+import Modal from './components/Modal'
 
-export { MyCounter }
+export { Modal }
