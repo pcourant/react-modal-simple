@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal } from '../../src'
+import { Modal } from 'react-modal-simple-customizable'
 
 const App = () => {
   const [showModal, setShowModal] = useState(false)
