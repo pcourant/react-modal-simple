@@ -2,7 +2,7 @@ import React, { PropsWithChildren, ReactNode, useCallback, useEffect, useRef } f
 import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import styles from './Modal.module.css'
-import fade from './Fade.module.css'
+import transitions from './Transitions.module.css'
 
 interface ModalProps extends PropsWithChildren {
   title?: ReactNode
@@ -37,8 +37,8 @@ const Modal = ({ show, onClose, title, children }: ModalProps) => {
   }
 
   return createPortal(
-    <CSSTransition in={show} nodeRef={nodeRef} timeout={300} classNames={{ ...fade }} unmountOnExit>
-      <div className={styles.modal} onClick={onClose}>
+    <CSSTransition in={show} nodeRef={nodeRef} timeout={300} classNames={{ ...transitions }} unmountOnExit>
+      <div ref={nodeRef} className={styles.modal} onClick={onClose}>
         <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
           <div className={styles.modalHeader}>{title}</div>
           <div className={styles.modalBody}>{children}</div>

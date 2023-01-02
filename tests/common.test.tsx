@@ -1,8 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import 'jest-canvas-mock'
-
 import { Modal } from '../src/'
 
 let container: HTMLElement
