@@ -16,10 +16,6 @@ const App = () => {
         </Modal>
       </div>
       <hr />
-      {/* <div>
-      <h2>Counter with predefined value</h2>
-      <Modal value={5} />
-    </div> */}
     </div>
   )
 }

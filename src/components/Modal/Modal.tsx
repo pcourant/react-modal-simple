@@ -1,6 +1,8 @@
-import React, { PropsWithChildren, ReactNode, useEffect } from 'react'
-
+import React, { PropsWithChildren, ReactNode, useCallback, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
+import { CSSTransition } from 'react-transition-group'
 import styles from './Modal.module.css'
+import fade from './Fade.module.css'
 
 interface ModalProps extends PropsWithChildren {
   title?: ReactNode
@@ -8,45 +10,47 @@ interface ModalProps extends PropsWithChildren {
   onClose?: () => void
 }
 const Modal = ({ show, onClose, title, children }: ModalProps) => {
-  // const keyDownHandler = useCallback(
-  //   (event: KeyboardEvent) => {
-  //     console.log('User pressed: ', event.key)
+  const nodeRef = useRef(null)
+  const keyDownHandler = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
 
-  //     if (event.key === 'Escape') {
-  //       event.preventDefault()
-
-  //       if (onClose) onClose()
-  //     }
-  //   },
-  //   [onClose],
-  // )
+        if (onClose) onClose()
+      }
+    },
+    [onClose],
+  )
 
   useEffect(() => {
-    console.log('useEffect')
+    window.addEventListener('keydown', keyDownHandler)
 
-    // window.addEventListener('keydown', keyDownHandler)
-
-    // 👇️ clean up event listener
+    // clean up event listener when component is unmounted
     return () => {
-      // window.removeEventListener('keydown', keyDownHandler)
+      window.removeEventListener('keydown', keyDownHandler)
     }
-  }, [])
+  }, [keyDownHandler])
 
-  if (!show) {
-    return null
+  const rootElement = document.getElementById('root')
+  if (!rootElement) {
+    throw new Error('Your App should contain a html with root id to use Modal component correctly')
   }
-  return (
-    <div className={styles.modal} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalHeader}>{title}</div>
-        <div className={styles.modalBody}>{children}</div>
-        <div className={styles.modalFooter}>
-          <button type='button' className='button' onClick={onClose}>
-            Close
-          </button>
+
+  return createPortal(
+    <CSSTransition in={show} nodeRef={nodeRef} timeout={300} classNames={{ ...fade }} unmountOnExit>
+      <div className={styles.modal} onClick={onClose}>
+        <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.modalHeader}>{title}</div>
+          <div className={styles.modalBody}>{children}</div>
+          <div className={styles.modalFooter}>
+            <button type='button' className='button' onClick={onClose}>
+              Close
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </CSSTransition>,
+    rootElement,
   )
 }
 
