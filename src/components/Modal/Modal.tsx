@@ -1,15 +1,28 @@
-import React, { PropsWithChildren, ReactNode, useCallback, useEffect, useRef } from 'react'
+import React, { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import styles from './Modal.module.css'
 import transitions from './Transitions.module.css'
 
+// interface ModalClassNames {
+//   appear?: string | undefined
+//   appearActive?: string | undefined
+//   appearDone?: string | undefined
+//   enter?: string | undefined
+//   enterActive?: string | undefined
+//   enterDone?: string | undefined
+//   exit?: string | undefined
+//   exitActive?: string | undefined
+//   exitDone?: string | undefined
+// }
+
 interface ModalProps extends PropsWithChildren {
-  title?: ReactNode
   show?: boolean
+  transitionTimeout?: number | { enter?: number; exit?: number }
   onClose?: () => void
+  // classNames="Modal"
 }
-const Modal = ({ show, onClose, title, children }: ModalProps) => {
+const Modal = ({ show, onClose, transitionTimeout = 300, children }: ModalProps) => {
   const nodeRef = useRef(null)
   const keyDownHandler = useCallback(
     (event: KeyboardEvent) => {
@@ -37,16 +50,16 @@ const Modal = ({ show, onClose, title, children }: ModalProps) => {
   }
 
   return createPortal(
-    <CSSTransition in={show} nodeRef={nodeRef} timeout={300} classNames={{ ...transitions }} unmountOnExit>
-      <div ref={nodeRef} className={styles.modal} onClick={onClose}>
-        <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.modalHeader}>{title}</div>
-          <div className={styles.modalBody}>{children}</div>
-          <div className={styles.modalFooter}>
-            <button type='button' className='button' onClick={onClose}>
-              Close
-            </button>
-          </div>
+    <CSSTransition
+      in={show}
+      nodeRef={nodeRef}
+      timeout={transitionTimeout}
+      classNames={{ ...transitions }}
+      unmountOnExit
+    >
+      <div ref={nodeRef} className={styles.overlay} onClick={onClose}>
+        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+          {children}
         </div>
       </div>
     </CSSTransition>,

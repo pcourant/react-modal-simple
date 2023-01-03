@@ -1,0 +1,22 @@
+.modalHeader,
+.modalFooter {
+  padding: 10px;
+}
+
+.modalTitle {
+  margin: 0;
+}
+
+.modalBody {
+  margin: 0;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.modalCloseButton {
+  padding: 8px 10px;
+  background-color: black;
+  color: white;
+  border-radius: 5;
+}
