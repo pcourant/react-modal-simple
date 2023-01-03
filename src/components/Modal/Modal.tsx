@@ -20,9 +20,10 @@ interface ModalProps extends PropsWithChildren {
   show?: boolean
   transitionTimeout?: number | { enter?: number; exit?: number }
   onClose?: () => void
-  // classNames="Modal"
+  className?: string
+  overlayClassName?: string
 }
-const Modal = ({ show, onClose, transitionTimeout = 300, children }: ModalProps) => {
+const Modal = ({ show, onClose, transitionTimeout = 300, className, overlayClassName, children }: ModalProps) => {
   const nodeRef = useRef(null)
   const keyDownHandler = useCallback(
     (event: KeyboardEvent) => {
@@ -57,8 +58,9 @@ const Modal = ({ show, onClose, transitionTimeout = 300, children }: ModalProps)
       classNames={{ ...transitions }}
       unmountOnExit
     >
-      <div ref={nodeRef} className={styles.overlay} onClick={onClose}>
-        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div ref={nodeRef} className={overlayClassName ? overlayClassName : styles.overlay} onClick={onClose}>
+        {/* <h1>TEST UPDATE</h1> */}
+        <div className={className ? className : styles.modal} onClick={(e) => e.stopPropagation()}>
           {children}
         </div>
       </div>

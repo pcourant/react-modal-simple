@@ -3,3 +3,7 @@ yarn.lock
 .parcel-cache
 dist
 yarn-error.log
+
+# yalc
+yalc.lock
+examples/.yalc/*

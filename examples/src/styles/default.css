@@ -1,6 +1,6 @@
 .modal {
-  width: 200px;
-  background: pink;
+  width: 700px;
+  background: rgb(204, 2, 36);
 }
 
 .overlay {
@@ -9,7 +9,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(38, 3, 213, 0.6);
+  background-color: rgba(3, 213, 87, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
