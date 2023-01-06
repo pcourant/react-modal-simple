@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-modal-simple-customizable'
 
+import { CodeBlock, CopyBlock } from 'react-code-blocks'
+
 import defaultStyles from './styles/CSSModules/Default.module.css'
 import './styles/default.css'
 
@@ -18,6 +20,16 @@ const App = () => {
         <button type='button' onClick={() => setShow1(true)}>
           Show Modal 1
         </button>
+        <br />
+        <br />
+        <CodeBlock
+          language='jsx'
+          text={`const [show1, setShow1] = useState(false);
+<Modal onClose={() => setShow1(false)} show={show1}>
+... 
+</Modal>`}
+        />
+
         <Modal onClose={() => setShow1(false)} show={show1}>
           <div className='modalHeader'>
             <h1 className='modalTitle'>Modal title</h1>
@@ -37,6 +49,13 @@ const App = () => {
         <button type='button' onClick={() => setShow2(true)}>
           Show Modal 2
         </button>
+        <br />
+        <br />
+        <CodeBlock
+          language='jsx'
+          text={`import './styles/default.css'
+<Modal ... className='modal' overlayClassName='overlay'>`}
+        />
         <Modal onClose={() => setShow2(false)} show={show2} className='modal' overlayClassName='overlay'>
           <div className='modalHeader'>
             <h1 className='modalTitle'>Modal title</h1>
@@ -56,6 +75,13 @@ const App = () => {
         <button type='button' onClick={() => setShow3(true)}>
           Show Modal 3
         </button>
+        <br />
+        <br />
+        <CodeBlock
+          language='jsx'
+          text={`import defaultStyles from './styles/CSSModules/Default.module.css'
+<Modal ... className={defaultStyles.modal} overlayClassName={defaultStyles.overlay}>`}
+        />
         <Modal
           onClose={() => setShow3(false)}
           show={show3}
@@ -118,6 +144,9 @@ const App = () => {
         <button type='button' onClick={() => setShow5(true)}>
           Show Modal 5
         </button>
+        <br />
+        <br />
+        <CodeBlock language='jsx' text={`<Modal ... escapeClose={false} clickClose={false}>`} />
         <Modal show={show5} onClose={() => setShow5(false)} escapeClose={false} clickClose={false}>
           <p className='modalBody'>
             If you do this, be sure to provide the user with an alternate method of
