@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
+import React, { MouseEvent, PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import styles from './Modal.module.css'
@@ -20,10 +20,21 @@ interface ModalProps extends PropsWithChildren {
   show?: boolean
   transitionTimeout?: number | { enter?: number; exit?: number }
   onClose?: () => void
+  escapeClose?: boolean
+  clickClose?: boolean
   className?: string
   overlayClassName?: string
 }
-const Modal = ({ show, onClose, transitionTimeout = 300, className, overlayClassName, children }: ModalProps) => {
+const Modal = ({
+  show,
+  onClose,
+  escapeClose = true,
+  clickClose = true,
+  transitionTimeout = 300,
+  className,
+  overlayClassName,
+  children,
+}: ModalProps) => {
   const nodeRef = useRef(null)
   const keyDownHandler = useCallback(
     (event: KeyboardEvent) => {
@@ -36,14 +47,23 @@ const Modal = ({ show, onClose, transitionTimeout = 300, className, overlayClass
     [onClose],
   )
 
+  const handleClickOverlay = useCallback(
+    (event: MouseEvent) => {
+      event.stopPropagation()
+
+      if (onClose && clickClose) onClose()
+    },
+    [clickClose, onClose],
+  )
+
   useEffect(() => {
-    window.addEventListener('keydown', keyDownHandler)
+    if (escapeClose) window.addEventListener('keydown', keyDownHandler)
 
     // clean up event listener when component is unmounted
     return () => {
-      window.removeEventListener('keydown', keyDownHandler)
+      if (escapeClose) window.removeEventListener('keydown', keyDownHandler)
     }
-  }, [keyDownHandler])
+  }, [escapeClose, keyDownHandler])
 
   const rootElement = document.getElementById('root')
   if (!rootElement) {
@@ -58,8 +78,7 @@ const Modal = ({ show, onClose, transitionTimeout = 300, className, overlayClass
       classNames={{ ...transitions }}
       unmountOnExit
     >
-      <div ref={nodeRef} className={overlayClassName ? overlayClassName : styles.overlay} onClick={onClose}>
-        {/* <h1>TEST UPDATE</h1> */}
+      <div ref={nodeRef} className={overlayClassName ? overlayClassName : styles.overlay} onClick={handleClickOverlay}>
         <div className={className ? className : styles.modal} onClick={(e) => e.stopPropagation()}>
           {children}
         </div>
