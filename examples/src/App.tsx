@@ -12,6 +12,12 @@ const App = () => {
   const [show3, setShow3] = useState(false)
   const [show4, setShow4] = useState(false)
   const [show5, setShow5] = useState(false)
+  const [show6, setShow6] = useState(false)
+  const [show6_2, setShow6_2] = useState(false)
+  const [show6_3, setShow6_3] = useState(false)
+  const [show6bis, setShow6bis] = useState(false)
+  const [show6bis_2, setShow6bis_2] = useState(false)
+  const [show6bis_3, setShow6bis_3] = useState(false)
 
   return (
     <div className='App'>
@@ -165,6 +171,118 @@ const App = () => {
               cf. mdn doc warning.
             </a>
           </p>
+        </Modal>
+      </div>
+      <hr />
+      {/* ***************************************************************************************** */}
+      <div>
+        <h2>Multiple Modals</h2>
+        <button type='button' onClick={() => setShow6(true)}>
+          Show Modal 6
+        </button>
+        <br />
+        <br />
+        <p>
+          By default it stacks multiple modals. Use <code>onClick</code> event to close the previous modal.
+        </p>
+        <button type='button' onClick={() => setShow6bis(true)}>
+          Show Modal 6bis
+        </button>
+        <br />
+        <br />
+        <CodeBlock
+          language='jsx'
+          text={`<button type='button' onClick={() => {setShow6bis(false); setShow6bis_2(true)}}>Next</button>`}
+        />
+        <Modal show={show6} onClose={() => setShow6(false)} className='modal1'>
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>First modal</h1>
+          </div>
+          <p className='modalBody'>Open the second modal</p>
+          <div className='modalFooter'>
+            <button type='button' onClick={() => setShow6_2(true)}>
+              Next
+            </button>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6(false)}>
+              Close
+            </button>
+          </div>
+        </Modal>
+        <Modal show={show6_2} onClose={() => setShow6_2(false)} className='modal2'>
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>Second modal</h1>
+          </div>
+          <p className='modalBody'>Open the third modal</p>
+          <div className='modalFooter'>
+            <button type='button' onClick={() => setShow6_3(true)}>
+              Next
+            </button>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6_2(false)}>
+              Close
+            </button>
+          </div>
+        </Modal>
+        <Modal show={show6_3} onClose={() => setShow6_3(false)} className='modal3'>
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>Third modal</h1>
+          </div>
+          <p className='modalBody'>You get the idea.</p>
+          <div className='modalFooter'>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6_3(false)}>
+              Close
+            </button>
+          </div>
+        </Modal>
+        <Modal show={show6bis} onClose={() => setShow6bis(false)} className='modal1'>
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>First modal</h1>
+          </div>
+          <p className='modalBody'>Open the second modal</p>
+          <div className='modalFooter'>
+            <button
+              type='button'
+              onClick={() => {
+                setShow6bis(false)
+                setShow6bis_2(true)
+              }}
+            >
+              Next
+            </button>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6bis(false)}>
+              Close
+            </button>
+          </div>
+        </Modal>
+        <Modal show={show6bis_2} onClose={() => setShow6bis_2(false)} className='modal2'>
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>Second modal</h1>
+          </div>
+          <p className='modalBody'>Open the third modal</p>
+          <div className='modalFooter'>
+            <button
+              type='button'
+              onClick={() => {
+                setShow6bis_2(false)
+                setShow6bis_3(true)
+              }}
+            >
+              Next
+            </button>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6bis_2(false)}>
+              Close
+            </button>
+          </div>
+        </Modal>
+        <Modal show={show6bis_3} onClose={() => setShow6bis_3(false)} className='modal3'>
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>Third modal</h1>
+          </div>
+          <p className='modalBody'>You get the idea.</p>
+          <div className='modalFooter'>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6bis_3(false)}>
+              Close
+            </button>
+          </div>
         </Modal>
       </div>
       <hr />

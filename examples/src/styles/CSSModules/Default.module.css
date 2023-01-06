@@ -3,6 +3,16 @@
   background: pink;
 }
 
+.modal2 {
+  width: 200px;
+  background: pink;
+}
+
+.modal3 {
+  width: 200px;
+  background: pink;
+}
+
 .overlay {
   position: fixed;
   left: 0;
@@ -32,14 +42,10 @@
   border-bottom: 1px solid #eee;
 }
 
-.modalCloseButton,
-.modalConnectButton {
+button {
   padding: 8px 10px;
   background-color: black;
   color: white;
   border-radius: 5;
-}
-
-.modalConnectButton {
   margin-right: 10px;
 }
