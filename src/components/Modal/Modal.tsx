@@ -4,35 +4,37 @@ import { CSSTransition } from 'react-transition-group'
 import styles from './Modal.module.css'
 import transitions from './Transitions.module.css'
 
-// interface ModalClassNames {
-//   appear?: string | undefined
-//   appearActive?: string | undefined
-//   appearDone?: string | undefined
-//   enter?: string | undefined
-//   enterActive?: string | undefined
-//   enterDone?: string | undefined
-//   exit?: string | undefined
-//   exitActive?: string | undefined
-//   exitDone?: string | undefined
-// }
+interface TransitionsClassNames {
+  appear?: string | undefined
+  appearActive?: string | undefined
+  appearDone?: string | undefined
+  enter?: string | undefined
+  enterActive?: string | undefined
+  enterDone?: string | undefined
+  exit?: string | undefined
+  exitActive?: string | undefined
+  exitDone?: string | undefined
+}
 
 interface ModalProps extends PropsWithChildren {
   show?: boolean
-  transitionTimeout?: number | { enter?: number; exit?: number }
+  transitionTimeoutMS?: number | { enter?: number; exit?: number; appear?: number }
   onClose?: () => void
   escapeClose?: boolean
   clickClose?: boolean
   className?: string
   overlayClassName?: string
+  transitionsClassName?: string | TransitionsClassNames
 }
 const Modal = ({
   show,
   onClose,
   escapeClose = true,
   clickClose = true,
-  transitionTimeout = 300,
+  transitionTimeoutMS = 300,
   className,
   overlayClassName,
+  transitionsClassName,
   children,
 }: ModalProps) => {
   const nodeRef = useRef(null)
@@ -70,12 +72,23 @@ const Modal = ({
     throw new Error('Your App should contain a html with root id to use Modal component correctly')
   }
 
+  let transitionsClassNameProp = undefined
+  if (transitionsClassName) {
+    if (typeof transitionsClassName === 'string') {
+      transitionsClassNameProp = transitionsClassName
+    } else {
+      transitionsClassNameProp = { ...transitionsClassName }
+    }
+  } else {
+    transitionsClassNameProp = { ...transitions }
+  }
+
   return createPortal(
     <CSSTransition
       in={show}
       nodeRef={nodeRef}
-      timeout={transitionTimeout}
-      classNames={{ ...transitions }}
+      timeout={transitionTimeoutMS}
+      classNames={transitionsClassNameProp}
       unmountOnExit
     >
       <div ref={nodeRef} className={overlayClassName ? overlayClassName : styles.overlay} onClick={handleClickOverlay}>
