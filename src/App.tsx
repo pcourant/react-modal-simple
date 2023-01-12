@@ -3,8 +3,8 @@ import { Modal } from 'react-modal-simple-customizable';
 
 import { CodeBlock } from 'react-code-blocks';
 
-import styles from './styles/Modal.module.css';
-import transitions from './styles/Transitions.module.css';
+import * as styles from './styles/Modal.module.css';
+import * as transitions from './styles/Transitions.module.css';
 import './styles/Modal.css';
 
 const App = () => {
