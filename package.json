@@ -1,6 +1,6 @@
 {
   "name": "react-modal-simple-customizable",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Demo page for react-modal-simple-customizable",
   "scripts": {
     "start": "parcel src/index.html",
