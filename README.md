@@ -5,7 +5,7 @@
 ![npm-typescript]
 [![License][github-license]][github-license-url]
 
-It is simple React modal dialog.
+It is simple React modal dialog which can be fully and easily customized
 
 [**Live Demo**](https://pcourant.github.io/react-modal-simple-customizable/)
 
@@ -26,25 +26,27 @@ yarn add -D react-modal-simple-customizable
 Add `Modal` to your component:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React, { useState } from 'react'
 import { Modal } from 'react-modal-simple-customizable'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-    <React.StrictMode>
-        <div>
-            <h2>Default counter</h2>
-            <Modal />
-        </div>
-        <hr />
-        <div>
-            <h2>Counter with predefined value</h2>
-            <Modal value={5} />
-        </div>
-    </React.StrictMode>,
-)
+const App = () => {
+  const [show, setShow] = useState(false)
 
+  return (
+    <div className='App'>
+      <button type='button' onClick={() => setShow(true)}>
+        Show Modal
+      </button>
+      <Modal onClose={() => setShow(false)} show={show}>
+        <h1>Modal title</h1>
+        <p>modal paragraph</p>
+        <button type='button' onClick={() => setShow(false)}>
+          Close
+        </button>
+      </Modal>
+    </div>
+  )
+}
 ```
 
 [npm-url]: https://www.npmjs.com/package/react-modal-simple-customizable

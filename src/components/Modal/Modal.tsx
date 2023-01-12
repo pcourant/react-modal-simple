@@ -72,6 +72,7 @@ const Modal = ({
     throw new Error('Your App should contain a html with root id to use Modal component correctly')
   }
 
+  // Type narrowing
   let transitionsClassNameProp = undefined
   if (transitionsClassName) {
     if (typeof transitionsClassName === 'string') {

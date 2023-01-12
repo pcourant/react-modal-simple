@@ -1,6 +1,6 @@
 {
   "name": "examples",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "start": "parcel src/index.html"
@@ -16,6 +16,6 @@
     "react": "^18.2.0",
     "react-code-blocks": "^0.0.9-0",
     "react-dom": "^18.2.0",
-    "react-modal-simple-customizable": "file:.yalc/react-modal-simple-customizable"
+    "react-modal-simple-customizable": "^1.0.3"
   }
 }

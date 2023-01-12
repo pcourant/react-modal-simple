@@ -107,7 +107,7 @@ const App = () => {
           </div>
           <p className={styles.modalBody}>modal paragraph body</p>
           <div className={styles.modalFooter}>
-            <button type='button' className={styles.modalCloseButton} onClick={() => setShow3(false)}>
+            <button type='button' onClick={() => setShow3(false)}>
               Close
             </button>
           </div>
@@ -136,7 +136,6 @@ const App = () => {
             <div className={styles.modalFooter}>
               <button
                 type='submit'
-                className={styles.modalConnectButton}
                 onClick={(e) => {
                   e.preventDefault()
                   alert(`You clicked submit`)
@@ -144,7 +143,7 @@ const App = () => {
               >
                 Connect
               </button>
-              <button type='button' className={styles.modalCloseButton} onClick={() => setShow4(false)}>
+              <button type='button' onClick={() => setShow4(false)}>
                 Cancel
               </button>
             </div>
