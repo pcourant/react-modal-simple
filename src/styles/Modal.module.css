@@ -1,0 +1,51 @@
+.modal {
+  width: 200px;
+  background: pink;
+}
+
+.modal2 {
+  width: 200px;
+  background: pink;
+}
+
+.modal3 {
+  width: 200px;
+  background: pink;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(38, 3, 213, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.modalHeader,
+.modalFooter {
+  padding: 10px;
+}
+
+.modalTitle {
+  margin: 0;
+}
+
+.modalBody {
+  margin: 0;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+button {
+  padding: 8px 10px;
+  background-color: black;
+  color: white;
+  border-radius: 5;
+  margin-right: 10px;
+}
