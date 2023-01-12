@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-modal-simple-customizable'
 
-import { CodeBlock, CopyBlock } from 'react-code-blocks'
+import { CodeBlock } from 'react-code-blocks'
 
 import styles from './styles/Modal.module.css'
 import transitions from './styles/Transitions.module.css'
