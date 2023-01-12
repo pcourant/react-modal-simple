@@ -3,8 +3,9 @@ import { Modal } from 'react-modal-simple-customizable'
 
 import { CodeBlock, CopyBlock } from 'react-code-blocks'
 
-import defaultStyles from './styles/CSSModules/Default.module.css'
-import './styles/default.css'
+import styles from './styles/Modal.module.css'
+import transitions from './styles/Transitions.module.css'
+import './styles/Modal.css'
 
 const App = () => {
   const [show1, setShow1] = useState(false)
@@ -12,15 +13,26 @@ const App = () => {
   const [show3, setShow3] = useState(false)
   const [show4, setShow4] = useState(false)
   const [show5, setShow5] = useState(false)
-  const [show6, setShow6] = useState(false)
+  const [show6_1, setShow6_1] = useState(false)
   const [show6_2, setShow6_2] = useState(false)
   const [show6_3, setShow6_3] = useState(false)
-  const [show6bis, setShow6bis] = useState(false)
+  const [show6bis_1, setShow6bis_1] = useState(false)
   const [show6bis_2, setShow6bis_2] = useState(false)
   const [show6bis_3, setShow6bis_3] = useState(false)
+  const [show7_1, setShow7_1] = useState(false)
+  const [show7_2, setShow7_2] = useState(false)
 
   return (
     <div className='App'>
+      <h1>react-modal-simple-customizable</h1>
+      <div>
+        <h2>Install</h2>
+        <p>
+          Refer to the<a href='https://github.com/pcourant/react-modal-simple-customizable#readme'>README</a>.
+        </p>
+      </div>
+      <hr />
+      {/* ***************************************************************************************** */}
       <div>
         <h2>Default modal</h2>
         <button type='button' onClick={() => setShow1(true)}>
@@ -31,6 +43,7 @@ const App = () => {
         <CodeBlock
           language='jsx'
           text={`const [show1, setShow1] = useState(false);
+<button type='button' onClick={() => setShow1(true)}>Show Modal 1</button>
 <Modal onClose={() => setShow1(false)} show={show1}>
 ... 
 </Modal>`}
@@ -59,7 +72,7 @@ const App = () => {
         <br />
         <CodeBlock
           language='jsx'
-          text={`import './styles/default.css'
+          text={`import './styles/Modal.css'
 <Modal ... className='modal' overlayClassName='overlay'>`}
         />
         <Modal onClose={() => setShow2(false)} show={show2} className='modal' overlayClassName='overlay'>
@@ -85,21 +98,16 @@ const App = () => {
         <br />
         <CodeBlock
           language='jsx'
-          text={`import defaultStyles from './styles/CSSModules/Default.module.css'
-<Modal ... className={defaultStyles.modal} overlayClassName={defaultStyles.overlay}>`}
+          text={`import styles from './styles/Modal.module.css'
+<Modal ... className={styles.modal} overlayClassName={styles.overlay}>`}
         />
-        <Modal
-          onClose={() => setShow3(false)}
-          show={show3}
-          className={defaultStyles.modal}
-          overlayClassName={defaultStyles.overlay}
-        >
-          <div className={defaultStyles.modalHeader}>
-            <h1 className={defaultStyles.modalTitle}>Modal title</h1>
+        <Modal onClose={() => setShow3(false)} show={show3} className={styles.modal} overlayClassName={styles.overlay}>
+          <div className={styles.modalHeader}>
+            <h1 className={styles.modalTitle}>Modal title</h1>
           </div>
-          <p className={defaultStyles.modalBody}>modal paragraph body</p>
-          <div className={defaultStyles.modalFooter}>
-            <button type='button' className={defaultStyles.modalCloseButton} onClick={() => setShow3(false)}>
+          <p className={styles.modalBody}>modal paragraph body</p>
+          <div className={styles.modalFooter}>
+            <button type='button' className={styles.modalCloseButton} onClick={() => setShow3(false)}>
               Close
             </button>
           </div>
@@ -113,11 +121,11 @@ const App = () => {
           Show Modal 4
         </button>
         <Modal onClose={() => setShow4(false)} show={show4}>
-          <div className={defaultStyles.modalHeader}>
-            <h3 className={defaultStyles.modalTitle}>Please login to continue</h3>
+          <div className={styles.modalHeader}>
+            <h3 className={styles.modalTitle}>Please login to continue</h3>
           </div>
           <form action=''>
-            <div className={defaultStyles.modalBody}>
+            <div className={styles.modalBody}>
               <label htmlFor='username'>username </label>
               <input type='text' name='username' id='username'></input>
               <br />
@@ -125,10 +133,10 @@ const App = () => {
               <label htmlFor='password'>password </label>
               <input type='password' name='password' id='password'></input>
             </div>
-            <div className={defaultStyles.modalFooter}>
+            <div className={styles.modalFooter}>
               <button
                 type='submit'
-                className={defaultStyles.modalConnectButton}
+                className={styles.modalConnectButton}
                 onClick={(e) => {
                   e.preventDefault()
                   alert(`You clicked submit`)
@@ -136,7 +144,7 @@ const App = () => {
               >
                 Connect
               </button>
-              <button type='button' className={defaultStyles.modalCloseButton} onClick={() => setShow4(false)}>
+              <button type='button' className={styles.modalCloseButton} onClick={() => setShow4(false)}>
                 Cancel
               </button>
             </div>
@@ -177,24 +185,29 @@ const App = () => {
       {/* ***************************************************************************************** */}
       <div>
         <h2>Multiple Modals</h2>
-        <button type='button' onClick={() => setShow6(true)}>
+        <p>By default it stacks multiple modals.</p>
+        <button type='button' onClick={() => setShow6_1(true)}>
           Show Modal 6
         </button>
         <br />
         <br />
         <p>
-          By default it stacks multiple modals. Use <code>onClick</code> event to close the previous modal.
+          To close previous modals. Use <code>onClick</code> event callback.
         </p>
-        <button type='button' onClick={() => setShow6bis(true)}>
+        <button type='button' onClick={() => setShow6bis_1(true)}>
           Show Modal 6bis
         </button>
         <br />
         <br />
         <CodeBlock
           language='jsx'
-          text={`<button type='button' onClick={() => {setShow6bis(false); setShow6bis_2(true)}}>Next</button>`}
+          text={`<Modal show={show6bis_2} onClose={() => setShow6bis_2(false)} className='modal2'>
+...
+<button type='button' onClick={() => {setShow6bis_1(false); setShow6bis_2(true)}}>Next</button>
+...
+</Modal>`}
         />
-        <Modal show={show6} onClose={() => setShow6(false)} className='modal1'>
+        <Modal show={show6_1} onClose={() => setShow6_1(false)} className='modal1'>
           <div className='modalHeader'>
             <h1 className='modalTitle'>First modal</h1>
           </div>
@@ -203,7 +216,7 @@ const App = () => {
             <button type='button' onClick={() => setShow6_2(true)}>
               Next
             </button>
-            <button type='button' className='modalCloseButton' onClick={() => setShow6(false)}>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6_1(false)}>
               Close
             </button>
           </div>
@@ -233,7 +246,7 @@ const App = () => {
             </button>
           </div>
         </Modal>
-        <Modal show={show6bis} onClose={() => setShow6bis(false)} className='modal1'>
+        <Modal show={show6bis_1} onClose={() => setShow6bis_1(false)} className='modal1'>
           <div className='modalHeader'>
             <h1 className='modalTitle'>First modal</h1>
           </div>
@@ -242,13 +255,13 @@ const App = () => {
             <button
               type='button'
               onClick={() => {
-                setShow6bis(false)
+                setShow6bis_1(false)
                 setShow6bis_2(true)
               }}
             >
               Next
             </button>
-            <button type='button' className='modalCloseButton' onClick={() => setShow6bis(false)}>
+            <button type='button' className='modalCloseButton' onClick={() => setShow6bis_1(false)}>
               Close
             </button>
           </div>
@@ -280,6 +293,90 @@ const App = () => {
           <p className='modalBody'>You get the idea.</p>
           <div className='modalFooter'>
             <button type='button' className='modalCloseButton' onClick={() => setShow6bis_3(false)}>
+              Close
+            </button>
+          </div>
+        </Modal>
+      </div>
+      <hr />
+      {/* ***************************************************************************************** */}
+      <div>
+        <h2>Transitions</h2>
+        <p>
+          The transitions for when the modal is opened or closed is implemented using
+          <a href='https://reactcommunity.org/react-transition-group/css-transition'>CSSTransition</a>.
+        </p>
+        <p>
+          Please inform <code>{`<Modal />`}</code> about the transition time required for the animation.
+        </p>{' '}
+        <p>
+          Like this : <code>{`<Modal transitionTimeoutMS={2000}/>`}</code>
+        </p>
+        <p>
+          Or individually : <code>{`<Modal transitionTimeoutMS={{appear: 500, enter: 300, exit: 500}}/>`}</code>
+        </p>
+        <p>
+          More information
+          <a href='https://reactcommunity.org/react-transition-group/transition#Transition-prop-timeout'>here</a>
+        </p>
+        <h3>Overriding with CSS</h3>
+        <p>
+          More info
+          <a href='http://reactcommunity.org/react-transition-group/css-transition#CSSTransition-prop-classNames'>
+            here
+          </a>
+        </p>
+        <button type='button' onClick={() => setShow7_1(true)}>
+          Show Modal 7.1
+        </button>
+        <br />
+        <br />
+        <CodeBlock
+          language='jsx'
+          text={`import './styles/Modal.css'
+<Modal ... transitionTimeoutMS={2000} transitionsClassName='scale'>`}
+        />
+        <Modal onClose={() => setShow7_1(false)} show={show7_1} transitionTimeoutMS={2000} transitionsClassName='scale'>
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>Modal title</h1>
+          </div>
+          <p className='modalBody'>Modal opening with scale transition CSS override</p>
+          <div className='modalFooter'>
+            <button type='button' className='modalCloseButton' onClick={() => setShow7_1(false)}>
+              Close
+            </button>
+          </div>
+        </Modal>
+        {/* ---------------------------------------------------------------- */}
+        <h3>Overriding with CSS modules</h3>
+        <p>
+          More info
+          <a href='http://reactcommunity.org/react-transition-group/css-transition#CSSTransition-prop-classNames'>
+            here
+          </a>
+        </p>
+        <button type='button' onClick={() => setShow7_2(true)}>
+          Show Modal 7.2
+        </button>
+        <br />
+        <br />
+        <CodeBlock
+          language='jsx'
+          text={`import transitions from './styles/Transitions.module.css'
+<Modal ...transitionTimeoutMS={2000} transitionsClassName={transitions} >`}
+        />
+        <Modal
+          onClose={() => setShow7_2(false)}
+          show={show7_2}
+          transitionTimeoutMS={2000}
+          transitionsClassName={transitions}
+        >
+          <div className='modalHeader'>
+            <h1 className='modalTitle'>Modal title</h1>
+          </div>
+          <p className='modalBody'>modal paragraph body</p>
+          <div className='modalFooter'>
+            <button type='button' className='modalCloseButton' onClick={() => setShow7_2(false)}>
               Close
             </button>
           </div>
