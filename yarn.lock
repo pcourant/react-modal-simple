@@ -3145,10 +3145,10 @@ react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-modal-simple-customizable@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-modal-simple-customizable/-/react-modal-simple-customizable-1.0.4.tgz#edb5bd2199c6f85876f46470f1a8dd6e65052174"
-  integrity sha512-TpP8SShD87DP9uo8UAmWTmpYf+/Nz+JFzd4H3YOVSeSwTr75RgTBatCjRTpKFCiBDOcx8HjNpuARm85rsofXzA==
+react-modal-simple-customizable@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-modal-simple-customizable/-/react-modal-simple-customizable-1.0.6.tgz#2c78460fe32674f14e5c1249ca3ee3c43e11c24f"
+  integrity sha512-Rpbx+vLdVTznLhdncrOTOciboy9njbQwSOXFq/QMuhJxHyb/f6nTelH9OvYSqJafbN9op3c75fTYpdN2x1UnnA==
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"
