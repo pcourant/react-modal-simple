@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <button type='button' onClick={() => setShow(true)}>
+      <button type='button' onClick={() => setShowModal(true)}>
         Show Modal
       </button>
       <Modal onClose={onCloseHandler} show={showModal}>
