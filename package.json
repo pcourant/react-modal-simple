@@ -16,8 +16,9 @@
   "types": "./dist/esm/index.d.ts",
   "scripts": {
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 src/**/*.css dist/esm",
-    "build": "yarn clean && yarn build:esm && yarn build:cjs && yarn copy-files",
+    "copy-files:esm": "copyfiles -u 1 src/**/*.css dist/esm",
+    "copy-files:cjs": "copyfiles -u 1 src/**/*.css dist/cjs",
+    "build": "yarn clean && yarn build:esm && yarn build:cjs && yarn copy-files:esm && yarn copy-files:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
@@ -52,9 +53,6 @@
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
     "prettier": "^2.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-transition-group": "^4.4.5",
     "rimraf": "^3.0.2",
     "ts-jest": "^29.0.3",
     "types": "^0.1.1",
@@ -64,5 +62,10 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-transition-group": "^4.4.5"
   }
 }

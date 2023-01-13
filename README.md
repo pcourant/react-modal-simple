@@ -12,13 +12,19 @@ It is simple React modal dialog which can be fully and easily customized
 ## Installation:
 
 ```bash
-npm install react-modal-simple-customizable --save-dev
+npm install react-modal-simple-customizable
 ```
 
 or
 
 ```bash
-yarn add -D react-modal-simple-customizable
+yarn add react-modal-simple-customizable
+```
+
+or
+
+```bash
+pnpm add react-modal-simple-customizable
 ```
 
 ## Usage :
@@ -30,17 +36,19 @@ import React, { useState } from 'react'
 import { Modal } from 'react-modal-simple-customizable'
 
 const App = () => {
-  const [show, setShow] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+
+  const onCloseHandler = () => setShowModal(false)
 
   return (
     <div className='App'>
       <button type='button' onClick={() => setShow(true)}>
         Show Modal
       </button>
-      <Modal onClose={() => setShow(false)} show={show}>
+      <Modal onClose={onCloseHandler} show={showModal}>
         <h1>Modal title</h1>
         <p>modal paragraph</p>
-        <button type='button' onClick={() => setShow(false)}>
+        <button type='button' onClick={onCloseHandler}>
           Close
         </button>
       </Modal>
