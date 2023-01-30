@@ -1,4 +1,4 @@
-# react-modal-simple
+# react-modal-simple-customizable
 
 [![NPM version][npm-image]][npm-url]
 [![Build][github-build]][github-build-url]
